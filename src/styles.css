@@ -1,0 +1,48 @@
+/* src/styles.css */
+
+body {
+  background-color: #F5F5DC; /* Cream */
+  font-family: 'Roboto', sans-serif;
+  color: #333333; /* Dark Gray */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+}
+
+.primary {
+  background-color: #A3B18A; /* Muted Green */
+  color: #fff;
+}
+
+.secondary {
+  background-color: #D3AC2B; /* Gold */
+  color: #000;
+}
+
+.text-primary {
+  color: #333333;
+}
+
+.text-secondary {
+  color: #555555;
+}
+
+.button {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.button.primary {
+  background-color: #A3B18A;
+  color: #fff;
+}
+
+.button.secondary {
+  background-color: #D3AC2B;
+  color: #000;
+}
+
+/* Add more styles as needed */
