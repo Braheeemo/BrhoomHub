@@ -1,48 +1,104 @@
 /* src/styles.css */
 
 body {
-  background-color: #F5F5DC; /* Cream */
-  font-family: 'Roboto', sans-serif;
-  color: #333333; /* Dark Gray */
+  background-color: #f8f8ff; /* Light Gray - softer than cream */
+  font-family: 'Arial', sans-serif; /* More common and readable */
+  color: #2e4053; /* Dark blue-gray, good contrast */
+  line-height: 1.6; /* Improved readability */
+  margin: 0; /* Reset default margin */
+  padding: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 500;
+  font-weight: 700; /* Make headings stand out */
+  color: #34495e;
+  margin-bottom: 0.5em; /* Consistent spacing below headings */
 }
 
-.primary {
-  background-color: #A3B18A; /* Muted Green */
-  color: #fff;
+p {
+  margin-bottom: 1em; /* Consistent spacing below paragraphs */
 }
 
-.secondary {
-  background-color: #D3AC2B; /* Gold */
-  color: #000;
+/* Use more descriptive class names */
+.container {
+  width: 80%;
+  margin: 0 auto; /* Center the content */
+  padding: 20px;
 }
 
-.text-primary {
-  color: #333333;
-}
-
-.text-secondary {
-  color: #555555;
-}
-
-.button {
-  padding: 10px 20px;
+.primary-button {
+  background-color: #3498db; /* A more modern blue */
+  color: #fff !important; /* Ensure text is always white */
+  padding: 12px 24px;
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  font-size: 1em;
+  transition: background-color 0.3s ease; /* Smooth transition */
 }
 
-.button.primary {
-  background-color: #A3B18A;
-  color: #fff;
+.primary-button:hover {
+  background-color: #2980b9; /* Darken on hover */
 }
 
-.button.secondary {
-  background-color: #D3AC2B;
-  color: #000;
+.secondary-button {
+  background-color: #ecf0f1; /* Light gray */
+  color: #34495e !important; /* Ensure text is always dark */
+  padding: 12px 24px;
+  border: 1px solid #bdc3c7; /* Add a subtle border */
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.secondary-button:hover {
+  background-color: #bdc3c7; /* Darken on hover */
+}
+
+.error-message {
+  color: #c0392b; /* A more noticeable red */
+  margin-bottom: 1em;
 }
 
 /* Add more styles as needed */
+/* Example for links */
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Minimalist form styling */
+label {
+  display: block;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+
+input[type="email"], input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1.5em;
+  border: 1px solid #bdc3c7;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+/* Adjust watermark for better visibility */
+#watermark {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    padding: 8px;
+    font-size: 0.9em;
+    color: #7f8c8d;
+    z-index: 100; /* Ensure it's on top */
+pointer-events: none; /* Avoid interfering with clicks */
+}
