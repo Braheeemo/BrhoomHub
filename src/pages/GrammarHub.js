@@ -1,7 +1,7 @@
 // src/pages/GrammarHub.js
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Container, Typography, List, ListItem, Paper, Box } from '@mui/material';
+import { Container, Typography, List, ListItem, Paper } from '@mui/material'; // Removed Box
 
 const grammarSections = [
   { id: 'present-simple', name: 'Present Simple' },

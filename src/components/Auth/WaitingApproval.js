@@ -1,6 +1,6 @@
 import React from 'react';
-import { Container, Paper, Typography, Box, CircularProgress, Button } from '@mui/material'; // Added Button
-import { Link as RouterLink } from 'react-router-dom'; // For logout or other links
+import { Container, Paper, Typography, CircularProgress, Button } from '@mui/material'; // Removed Box
+// import { Link as RouterLink } from 'react-router-dom'; // REMOVED: Unused import
 import { auth } from '../../services/firebase'; // To potentially offer a logout option
 import LogoutIcon from '@mui/icons-material/Logout'; // Import LogoutIcon
 
