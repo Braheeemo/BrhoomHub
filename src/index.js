@@ -4,7 +4,7 @@ import App from './App';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline'; // Import CssBaseline
 import theme from './components/UI/Theme';
-import './index.css'; // Assuming this might contain font imports or other global styles
+import './styles.css'; // Corrected import to point to existing styles.css
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

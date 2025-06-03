@@ -204,3 +204,79 @@ This document outlines the testing procedures for the BrhoomHub application, esp
 8.  **Overall Aesthetic:**
     *   **Action:** Consider the overall look and feel.
     *   **Expected:** The UI should feel more polished, modern, and aligned with the "elegant" and "ADHD-friendly" (clear, uncluttered) design goals, incorporating the new theme.
+
+---
+
+**VII. Interactive Quiz Functionality - Present Simple (`/quiz/grammar/present-simple`):**
+
+1.  **Initial Quiz Page Load:**
+    *   **Action:** Navigate to the "Present Simple" quiz from the Grammar Hub, or directly access `/quiz/grammar/present-simple`.
+    *   **Expected:**
+        *   The page title "Quiz for Present Simple" is displayed.
+        *   The first question of the "Present Simple" set is displayed clearly.
+        *   The question counter (e.g., "Question 1 of 30") is visible and accurate.
+        *   Four multiple-choice options are displayed as clickable buttons, styled according to the theme (e.g., outlined, full-width).
+        *   Initially, no option is selected.
+        *   The "Submit" button is visible and enabled (or becomes enabled once an option is selected, if that's the design).
+        *   "Next Question" and "Show Results" buttons are initially hidden.
+        *   No feedback `Alert` message is visible.
+
+2.  **Option Selection:**
+    *   **Action:** Click on one of the option buttons for the current question.
+    *   **Expected:**
+        *   The selected option button should visually change to indicate selection (e.g., border color changes to primary, border thickens, or a subtle background change as per theme).
+        *   If the "Submit" button was disabled, it should now be enabled.
+        *   No other options should change appearance yet.
+
+3.  **Answer Submission & Immediate Feedback:**
+    *   **Action:** With an option selected, click the "Submit" button.
+    *   **Expected:**
+        *   The "Submit" button becomes hidden or disabled.
+        *   All option buttons for the current question become disabled.
+        *   The correctly answered option button turns green (or themed success color).
+        *   If an incorrect option was selected by the user, their selected option turns red (or themed error color).
+        *   An `Alert` message appears:
+            *   If correct: Shows a success message (e.g., "Correct!") and the explanation for the answer.
+            *   If incorrect: Shows an error/warning message (e.g., "Not quite. The correct answer was: [Correct Option Text].") and the explanation.
+        *   The "Next Question" button appears (if not the last question).
+        *   The "Show Results" button appears (if it is the last question and answer submitted).
+        *   The score should be updated internally (not necessarily displayed yet).
+
+4.  **Navigating to Next Question:**
+    *   **Action:** Click the "Next Question" button.
+    *   **Expected:**
+        *   The next question and its options are displayed.
+        *   The question counter updates.
+        *   Option selection state is reset (no option selected).
+        *   The immediate feedback `Alert` from the previous question is hidden.
+        *   The "Submit" button is visible and enabled (or enabled upon option selection).
+        *   "Next Question" / "Show Results" buttons are hidden until the new answer is submitted.
+
+5.  **Completing the Quiz & Showing Results:**
+    *   **Action:** Answer all questions, proceeding through "Next Question". On the last question, after submitting the answer, click the "Show Results" button.
+    *   **Expected:**
+        *   The quiz interface (questions, options) is replaced by a "Quiz Results" view.
+        *   A summary of the final score is displayed prominently (e.g., "You scored X out of 30").
+        *   A detailed "Answer Log" is displayed:
+            *   Each item in the log corresponds to a question from the quiz.
+            *   Each item clearly shows:
+                *   The question text.
+                *   The user's selected answer.
+                *   The correct answer.
+                *   The explanation for the answer.
+                *   A clear visual indication (e.g., icon, color) of whether the user's answer was correct or incorrect for that question. (Verify background colors from theme are used for log items).
+        *   Buttons like "Back to Grammar Hub" and "View Overall Progress" are visible and functional.
+
+6.  **Attempting Quiz for Other Sections (Non-"present-simple"):**
+    *   **Action:** Manually navigate to a quiz URL for a section that doesn't have questions yet (e.g., `/quiz/grammar/past-simple`).
+    *   **Expected:**
+        *   The page should display a message like "Quiz not available for this section" or "Quiz questions for 'Past Simple' will appear here soon."
+        *   It should not crash or show an empty quiz interface.
+
+7.  **UI and Theme Consistency:**
+    *   **Action:** Throughout the quiz-taking process.
+    *   **Expected:**
+        *   All text (questions, options, feedback, logs) uses the themed fonts (Montserrat for headers, Lato for body).
+        *   Colors used for feedback (green/success, red/error), buttons, and backgrounds match the application theme.
+        *   Spacing and layout are clean and user-friendly.
+        *   Option buttons are easily clickable and readable.
