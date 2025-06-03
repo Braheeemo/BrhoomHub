@@ -1,9 +1,43 @@
 {
   "name": "brhoomhub",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
+  "description": "BrhoomHub: An online learning platform.",
+  "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.11",
+    "firebase": "^10.8.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.3"
+  },
+  "devDependencies": {
+    "react-scripts": "^5.0.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "repository": {
     "type": "git",
@@ -15,6 +49,5 @@
   "bugs": {
     "url": "https://github.com/Braheeemo/BrhoomHub/issues"
   },
-  "homepage": "https://github.com/Braheeemo/BrhoomHub#readme",
-  "description": ""
+  "homepage": "https://github.com/Braheeemo/BrhoomHub#readme"
 }

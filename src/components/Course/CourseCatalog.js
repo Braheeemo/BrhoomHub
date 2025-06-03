@@ -1,5 +1,5 @@
 import React from 'react';
-import CourseItem from './CourseItem';
+// import CourseItem from './CourseItem'; // Removed unused import
 import { Link } from 'react-router-dom';
 
 const CourseCatalog = () => {

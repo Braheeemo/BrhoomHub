@@ -1,51 +1,110 @@
 import React, { useState, useEffect } from 'react';
-import { db } from '../services/firebase';
+import { db } from '../services/firebase'; // Assuming path is correct
 import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
+import {
+  Container,
+  Typography,
+  Paper,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  Button,
+  CircularProgress,
+  Box,
+  Alert
+} from '@mui/material';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'; // Import icon
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const usersCollection = collection(db, 'users');
-      const usersSnapshot = await getDocs(usersCollection);
-      const usersList = usersSnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setUsers(usersList);
+      setLoading(true);
+      setError('');
+      try {
+        const usersCollection = collection(db, 'users');
+        const usersSnapshot = await getDocs(usersCollection);
+        const usersList = usersSnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setUsers(usersList);
+      } catch (err) {
+        console.error("Error fetching users:", err);
+        setError("Failed to fetch users. Please try again.");
+      }
+      setLoading(false);
     };
 
     fetchUsers();
   }, []);
 
   const handleApprove = async (userId) => {
-    const userDocRef = doc(db, 'users', userId);
-    await updateDoc(userDocRef, {
-      isApproved: true,
-    });
+    try {
+      const userDocRef = doc(db, 'users', userId);
+      await updateDoc(userDocRef, {
+        isApproved: true,
+      });
 
-    // Update the local state to reflect the change
-    setUsers(users.map(user =>
-      user.id === userId ? { ...user, isApproved: true } : user
-    ));
+      setUsers(users.map(user =>
+        user.id === userId ? { ...user, isApproved: true } : user
+      ));
+    } catch (err) {
+      console.error("Error approving user:", err);
+      // Potentially set an error message for this specific action
+      alert("Failed to approve user."); // Simple alert for now
+    }
   };
 
   return (
-    <div>
-      <h2>Admin Dashboard</h2>
-      <h3>User List:</h3>
-      <ul>
-        {users.map(user => (
-          <li key={user.id}>
-            {user.email} - Approved: {user.isApproved ? 'Yes' : 'No'}
-            {!user.isApproved && (
-              <button onClick={() => handleApprove(user.id)}>Approve</button>
-            )}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Typography variant="h4" component="h1" gutterBottom sx={{ color: 'primary.main', fontWeight: 'bold' }}>
+        Admin Dashboard
+      </Typography>
+
+      {loading && (
+        <Box sx={{ display: 'flex', justifyContent: 'center', my: 3 }}>
+          <CircularProgress />
+        </Box>
+      )}
+      {error && <Alert severity="error" sx={{ my: 2 }}>{error}</Alert>}
+
+      {!loading && !error && (
+        <Paper elevation={3} sx={{ mt: 2, p: 2 }}>
+          <Typography variant="h5" component="h2" gutterBottom sx={{ color: 'secondary.main', ml: 2 }}>
+            User Management
+          </Typography>
+          <List>
+            {users.map(user => (
+              <ListItem key={user.id} divider>
+                <ListItemText
+                  primary={user.email}
+                  secondary={`Approved: ${user.isApproved ? 'Yes' : 'No'} | Admin: ${user.isAdmin ? 'Yes' : 'No'}`}
+                />
+                <ListItemSecondaryAction>
+                  {!user.isApproved && (
+                    <Button
+                      variant="contained"
+                      color="success" // Use success color from theme
+                      size="small"
+                      onClick={() => handleApprove(user.id)}
+                      startIcon={<CheckCircleOutlineIcon />}
+                    >
+                      Approve
+                    </Button>
+                  )}
+                </ListItemSecondaryAction>
+              </ListItem>
+            ))}
+          </List>
+          {users.length === 0 && <Typography sx={{textAlign: 'center', p:2}}>No users found.</Typography>}
+        </Paper>
+      )}
+    </Container>
   );
 };
 

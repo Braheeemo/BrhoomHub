@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, setPersistence, inMemoryPersistence } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getAnalytics } from "firebase/analytics"; // Added Analytics import
 
 // Function to check if environment variable is set
 function isEnvVarSet(variableName) {
@@ -28,8 +29,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const analytics = getAnalytics(app); // Initialize Analytics
 
 // Set auth persistence
 setPersistence(auth, inMemoryPersistence);
 
-export { auth, db };
+export { auth, db, analytics }; // Added analytics to exports
