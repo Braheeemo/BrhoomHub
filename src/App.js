@@ -6,7 +6,7 @@ import WaitingApproval from './components/Auth/WaitingApproval';
 import AdminDashboard from './pages/AdminDashboard';
 import GrammarHub from './pages/GrammarHub'; // Added import
 import CourseCatalog from './components/Course/CourseCatalog';
-import QuizSection from './components/Quiz/QuizSection'; // This might be an old/generic quiz section, or could be removed if GrammarQuizPage replaces its purpose for grammar
+// import QuizSection from './components/Quiz/QuizSection'; // REMOVED: Module not found
 import GrammarQuizPage from './components/Quiz/GrammarQuizPage'; // Import for the new grammar quiz page
 import ProgressTracking from './components/Progress/ProgressTracking';
 import Watermark from './components/Watermark';
@@ -146,11 +146,12 @@ const App = () => {
             )
           }
         />
+        {/* REMOVED Route for /quiz/:courseId as QuizSection.js does not exist
         <Route
-          path="/quiz/:courseId" // Assuming this is for other types of quizzes, e.g., course-specific, not grammar
+          path="/quiz/:courseId"
           element={
             isLoggedIn && isApproved ? (
-              <QuizSection /> // This can remain if it serves a different purpose
+              <QuizSection />
             ) : isLoggedIn ? (
               <Navigate to="/waiting-approval" />
             ) : (
@@ -158,6 +159,7 @@ const App = () => {
             )
           }
         />
+        */}
         <Route
           path="/progress"
           element={
