@@ -113,12 +113,12 @@ This document outlines the testing procedures for the BrhoomHub application, esp
     *   **Expected:** Navigation and dynamic page titles work correctly for each selected section.
 
 4.  **Grammar Quiz Page Structure Verification:**
-    *   **Action:** On any ` /quiz/grammar/:sectionId` page:
+    *   **Action:** On any ` /quiz/grammar/:sectionId` page (before full quiz implementation):
     *   **Expected:**
         *   The main title "Quiz for [Section Name]" is displayed.
-        *   A placeholder area for "Quiz Area" is visible with text like "Quiz questions and interactive elements will appear here soon."
-        *   A placeholder area for "Answer Log (This Quiz)" is visible with text like "Your answers and results for this specific quiz will be logged here."
-        *   A button labeled "View Overall Progress" is visible and correctly links to the `/progress` page.
+        *   A placeholder area for "Quiz Area" indicates questions will appear.
+        *   A placeholder for "Answer Log" indicates results will appear.
+        *   A button "View Overall Progress" links to `/progress`.
     *   **Action:** Click the "View Overall Progress" button.
     *   **Expected:** User is navigated to the `/progress` page.
 
@@ -148,7 +148,7 @@ This document outlines the testing procedures for the BrhoomHub application, esp
     *   **Action:** Log in with any user type. Then, try accessing `/login` or `/signup` pages directly via URL.
     *   **Expected:** Redirected away from `/login`/`/signup` to the appropriate dashboard/page (e.g., `/grammar-hub`, `/waiting-approval`, or `/admin`).
 
-*Note: Some tests in section III were updated to reflect `/grammar-hub` as the new default instead of `/courses`.*
+*Note: Some tests in section III were updated to reflect `/grammar-hub` as the new default instead of `/courses`. The "Grammar Quiz Page Structure Verification" in section V was updated to reflect pre-full-quiz-implementation state.*
 
 ---
 
@@ -268,9 +268,9 @@ This document outlines the testing procedures for the BrhoomHub application, esp
         *   Buttons like "Back to Grammar Hub" and "View Overall Progress" are visible and functional.
 
 6.  **Attempting Quiz for Other Sections (Non-"present-simple"):**
-    *   **Action:** Manually navigate to a quiz URL for a section that doesn't have questions yet (e.g., `/quiz/grammar/past-simple`).
+    *   **Action:** Manually navigate to a quiz URL for a section that doesn't have questions yet (e.g., `/quiz/grammar/past-simple` before its questions were added, or another section).
     *   **Expected:**
-        *   The page should display a message like "Quiz not available for this section" or "Quiz questions for 'Past Simple' will appear here soon."
+        *   The page should display a message like "Quiz not available for this section" or "Quiz questions for '[Section Name]' will appear here soon."
         *   It should not crash or show an empty quiz interface.
 
 7.  **UI and Theme Consistency:**
@@ -280,3 +280,375 @@ This document outlines the testing procedures for the BrhoomHub application, esp
         *   Colors used for feedback (green/success, red/error), buttons, and backgrounds match the application theme.
         *   Spacing and layout are clean and user-friendly.
         *   Option buttons are easily clickable and readable.
+
+---
+
+**VIII. Interactive Quiz Functionality - Past Simple (`/quiz/grammar/past-simple`):**
+
+1.  **Initial Quiz Page Load:**
+    *   **Action:** Navigate to the "Past Simple" quiz from the Grammar Hub, or directly access `/quiz/grammar/past-simple`.
+    *   **Expected:**
+        *   The page title "Quiz for Past Simple" is displayed.
+        *   The first question of the "Past Simple" set is displayed clearly.
+        *   The question counter (e.g., "Question 1 of 30") is visible and accurate.
+        *   Four multiple-choice options are displayed as clickable buttons, styled according to the theme.
+        *   Initially, no option is selected.
+        *   The "Submit" button is visible and enabled (or becomes enabled once an option is selected).
+        *   "Next Question" / "Show Results" buttons are initially hidden.
+        *   No feedback `Alert` message is visible.
+
+2.  **Option Selection:**
+    *   **Action:** Click on one of the option buttons for the current question.
+    *   **Expected:**
+        *   The selected option button should visually change to indicate selection (e.g., themed border highlight).
+        *   If the "Submit" button was disabled, it should now be enabled.
+
+3.  **Answer Submission & Immediate Feedback:**
+    *   **Action:** With an option selected, click the "Submit" button.
+    *   **Expected:**
+        *   The "Submit" button becomes hidden or disabled.
+        *   All option buttons for the current question become disabled.
+        *   The correctly answered option button turns green (themed success color).
+        *   If an incorrect option was selected, their selected option turns red (themed error color).
+        *   An `Alert` message appears with correctness and explanation.
+        *   The appropriate control button ("Next Question" or "Show Results") appears.
+        *   (If implemented) The "live wrong answer log" updates if the answer was incorrect.
+        *   (If implemented) Auto-advance timer starts if enabled.
+
+4.  **Navigating to Next Question (Manual or Auto):**
+    *   **Action:** Click the "Next Question" button, or allow auto-advance timer to elapse.
+    *   **Expected:**
+        *   The next question and its options are displayed.
+        *   The question counter updates.
+        *   Option selection state is reset.
+        *   The immediate feedback `Alert` from the previous question is hidden.
+        *   The "Submit" button is visible.
+        *   "Next Question" / "Show Results" buttons are hidden until the new answer is submitted.
+
+5.  **Completing the Quiz & Showing Results:**
+    *   **Action:** Answer all questions. On the last question, after submitting, click "Show Results" or let auto-advance trigger it.
+    *   **Expected:**
+        *   The quiz interface is replaced by a "Quiz Results" view.
+        *   A summary of the final score is displayed.
+        *   A detailed "Answer Log" is displayed with all questions, user answers, correct answers, explanations, and correctness indicators.
+        *   Buttons like "Back to Grammar Hub" and "View Overall Progress" are visible and functional.
+
+6.  **UI and Theme Consistency:**
+    *   **Action:** Throughout the "Past Simple" quiz.
+    *   **Expected:**
+        *   All text and colors match the application theme.
+        *   Layout is clean and user-friendly.
+        *   Interactive elements behave as expected.
+        *   Quiz settings (e.g., auto-advance toggle) function correctly for this quiz.
+
+---
+
+**IX. Interactive Quiz Functionality - Present Progressive (`/quiz/grammar/present-progressive`):**
+
+1.  **Initial Quiz Page Load:**
+    *   **Action:** Navigate to the "Present Progressive" quiz from the Grammar Hub, or directly access `/quiz/grammar/present-progressive`.
+    *   **Expected:**
+        *   The page title "Quiz for Present Progressive" is displayed.
+        *   The first question of the "Present Progressive" set is displayed clearly.
+        *   The question counter (e.g., "Question 1 of 30") is visible and accurate.
+        *   Four multiple-choice options are displayed as clickable buttons, styled according to the theme.
+        *   Initially, no option is selected.
+        *   The "Submit" button is visible and enabled (or becomes enabled once an option is selected).
+        *   "Next Question" / "Show Results" buttons are initially hidden.
+        *   No feedback `Alert` message is visible.
+        *   (If implemented) Quiz settings like "Auto-advance" toggle are present.
+
+2.  **Option Selection:**
+    *   **Action:** Click on one of the option buttons for the current question.
+    *   **Expected:**
+        *   The selected option button should visually change to indicate selection (e.g., themed border highlight).
+        *   If the "Submit" button was disabled, it should now be enabled.
+
+3.  **Answer Submission & Immediate Feedback:**
+    *   **Action:** With an option selected, click the "Submit" button.
+    *   **Expected:**
+        *   The "Submit" button becomes hidden or disabled.
+        *   All option buttons for the current question become disabled.
+        *   The correctly answered option button turns green (themed success color).
+        *   If an incorrect option was selected, their selected option turns red (themed error color).
+        *   An `Alert` message appears with correctness and explanation relevant to Present Progressive.
+        *   The appropriate control button ("Next Question" or "Show Results") appears.
+        *   (If implemented) The "live wrong answer log" updates if the answer was incorrect.
+        *   (If implemented) Auto-advance timer starts if enabled in settings.
+
+4.  **Navigating to Next Question (Manual or Auto):**
+    *   **Action:** Click the "Next Question" button, or allow auto-advance timer to elapse (if enabled and applicable).
+    *   **Expected:**
+        *   The next question and its options are displayed.
+        *   The question counter updates.
+        *   Option selection state is reset.
+        *   The immediate feedback `Alert` from the previous question is hidden.
+        *   The "Submit" button is visible.
+        *   "Next Question" / "Show Results" buttons are hidden until the new answer is submitted.
+
+5.  **Completing the Quiz & Showing Results:**
+    *   **Action:** Answer all questions. On the last question, after submitting, click "Show Results" or let auto-advance trigger it.
+    *   **Expected:**
+        *   The quiz interface is replaced by a "Quiz Results" view.
+        *   A summary of the final score is displayed.
+        *   A detailed "Answer Log" is displayed with all questions, user answers, correct answers, explanations for Present Progressive, and correctness indicators.
+        *   Buttons like "Back to Grammar Hub" and "View Overall Progress" are visible and functional.
+
+6.  **Attempting Quiz for Other Sections (Non-"present-progressive" but also not implemented):**
+    *   **Action:** Manually navigate to a quiz URL for a section that doesn't have questions yet (e.g., `/quiz/grammar/future-simple`).
+    *   **Expected:**
+        *   The page should display a message like "Quiz not available for this section" or "Quiz questions for 'Future Simple' will appear here soon."
+
+7.  **UI and Theme Consistency:**
+    *   **Action:** Throughout the "Present Progressive" quiz.
+    *   **Expected:**
+        *   All text and colors match the application theme.
+        *   Layout is clean and user-friendly.
+        *   Interactive elements behave as expected.
+        *   (If implemented) Quiz settings (e.g., auto-advance toggle) function correctly for this quiz.
+
+---
+
+**X. Interactive Quiz Functionality - Present Perfect (`/quiz/grammar/present-perfect`):**
+
+1.  **Initial Quiz Page Load:**
+    *   **Action:** Navigate to the "Present Perfect" quiz from the Grammar Hub, or directly access `/quiz/grammar/present-perfect`.
+    *   **Expected:**
+        *   The page title "Quiz for Present Perfect" is displayed.
+        *   The first question of the "Present Perfect" set is displayed clearly.
+        *   The question counter (e.g., "Question 1 of 30") is visible and accurate.
+        *   Four multiple-choice options are displayed as clickable buttons, styled according to the theme.
+        *   Initially, no option is selected.
+        *   The "Submit" button is visible and enabled (or becomes enabled once an option is selected).
+        *   "Next Question" / "Show Results" buttons are initially hidden.
+        *   No feedback `Alert` message is visible.
+        *   (If implemented) Quiz settings like "Auto-advance" toggle are present.
+
+2.  **Option Selection:**
+    *   **Action:** Click on one of the option buttons for the current question.
+    *   **Expected:**
+        *   The selected option button should visually change to indicate selection (e.g., themed border highlight).
+        *   If the "Submit" button was disabled, it should now be enabled.
+
+3.  **Answer Submission & Immediate Feedback:**
+    *   **Action:** With an option selected, click the "Submit" button.
+    *   **Expected:**
+        *   The "Submit" button becomes hidden or disabled.
+        *   All option buttons for the current question become disabled.
+        *   The correctly answered option button turns green (themed success color).
+        *   If an incorrect option was selected, their selected option turns red (themed error color).
+        *   An `Alert` message appears with correctness and explanation relevant to Present Perfect.
+        *   The appropriate control button ("Next Question" or "Show Results") appears.
+        *   (If implemented) The "live wrong answer log" updates if the answer was incorrect.
+        *   (If implemented) Auto-advance timer starts if enabled in settings.
+
+4.  **Navigating to Next Question (Manual or Auto):**
+    *   **Action:** Click the "Next Question" button, or allow auto-advance timer to elapse (if enabled and applicable).
+    *   **Expected:**
+        *   The next question and its options are displayed.
+        *   The question counter updates.
+        *   Option selection state is reset.
+        *   The immediate feedback `Alert` from the previous question is hidden.
+        *   The "Submit" button is visible.
+        *   "Next Question" / "Show Results" buttons are hidden until the new answer is submitted.
+
+5.  **Completing the Quiz & Showing Results:**
+    *   **Action:** Answer all questions. On the last question, after submitting, click "Show Results" or let auto-advance trigger it.
+    *   **Expected:**
+        *   The quiz interface is replaced by a "Quiz Results" view.
+        *   A summary of the final score is displayed.
+        *   A detailed "Answer Log" is displayed with all questions, user answers, correct answers, explanations for Present Perfect, and correctness indicators.
+        *   Buttons like "Back to Grammar Hub" and "View Overall Progress" are visible and functional.
+
+6.  **UI and Theme Consistency:**
+    *   **Action:** Throughout the "Present Perfect" quiz.
+    *   **Expected:**
+        *   All text and colors match the application theme.
+        *   Layout is clean and user-friendly.
+        *   Interactive elements behave as expected.
+        *   (If implemented) Quiz settings (e.g., auto-advance toggle) function correctly for this quiz.
+
+---
+
+**XI. Interactive Quiz Functionality - Present Perfect Progressive (`/quiz/grammar/present-perfect-progressive`):**
+
+1.  **Initial Quiz Page Load:**
+    *   **Action:** Navigate to the "Present Perfect Progressive" quiz from the Grammar Hub, or directly access `/quiz/grammar/present-perfect-progressive`.
+    *   **Expected:**
+        *   The page title "Quiz for Present Perfect Progressive" is displayed.
+        *   The first question of the "Present Perfect Progressive" set is displayed clearly.
+        *   The question counter (e.g., "Question 1 of 30") is visible and accurate.
+        *   Four multiple-choice options are displayed as clickable buttons, styled according to the theme.
+        *   Initially, no option is selected.
+        *   The "Submit" button is visible and enabled (or becomes enabled once an option is selected).
+        *   "Next Question" / "Show Results" buttons are initially hidden.
+        *   No feedback `Alert` message is visible.
+        *   (If implemented) Quiz settings like "Auto-advance" toggle are present.
+
+2.  **Option Selection:**
+    *   **Action:** Click on one of the option buttons for the current question.
+    *   **Expected:**
+        *   The selected option button should visually change to indicate selection (e.g., themed border highlight).
+        *   If the "Submit" button was disabled, it should now be enabled.
+
+3.  **Answer Submission & Immediate Feedback:**
+    *   **Action:** With an option selected, click the "Submit" button.
+    *   **Expected:**
+        *   The "Submit" button becomes hidden or disabled.
+        *   All option buttons for the current question become disabled.
+        *   The correctly answered option button turns green (themed success color).
+        *   If an incorrect option was selected, their selected option turns red (themed error color).
+        *   An `Alert` message appears with correctness and explanation relevant to Present Perfect Progressive.
+        *   The appropriate control button ("Next Question" or "Show Results") appears.
+        *   (If implemented) The "live wrong answer log" updates if the answer was incorrect.
+        *   (If implemented) Auto-advance timer starts if enabled in settings.
+
+4.  **Navigating to Next Question (Manual or Auto):**
+    *   **Action:** Click the "Next Question" button, or allow auto-advance timer to elapse (if enabled and applicable).
+    *   **Expected:**
+        *   The next question and its options are displayed.
+        *   The question counter updates.
+        *   Option selection state is reset.
+        *   The immediate feedback `Alert` from the previous question is hidden.
+        *   The "Submit" button is visible.
+        *   "Next Question" / "Show Results" buttons are hidden until the new answer is submitted.
+
+5.  **Completing the Quiz & Showing Results:**
+    *   **Action:** Answer all questions. On the last question, after submitting, click "Show Results" or let auto-advance trigger it.
+    *   **Expected:**
+        *   The quiz interface is replaced by a "Quiz Results" view.
+        *   A summary of the final score is displayed.
+        *   A detailed "Answer Log" is displayed with all questions, user answers, correct answers, explanations for Present Perfect Progressive, and correctness indicators.
+        *   Buttons like "Back to Grammar Hub" and "View Overall Progress" are visible and functional.
+
+6.  **UI and Theme Consistency:**
+    *   **Action:** Throughout the "Present Perfect Progressive" quiz.
+    *   **Expected:**
+        *   All text and colors match the application theme.
+        *   Layout is clean and user-friendly.
+        *   Interactive elements behave as expected.
+        *   (If implemented) Quiz settings (e.g., auto-advance toggle) function correctly for this quiz.
+
+---
+
+**XII. Interactive Quiz Functionality - Past Perfect (`/quiz/grammar/past-perfect`):**
+
+1.  **Initial Quiz Page Load:**
+    *   **Action:** Navigate to the "Past Perfect" quiz from the Grammar Hub, or directly access `/quiz/grammar/past-perfect`.
+    *   **Expected:**
+        *   The page title "Quiz for Past Perfect" is displayed.
+        *   The first question of the "Past Perfect" set is displayed clearly.
+        *   The question counter (e.g., "Question 1 of 30") is visible and accurate.
+        *   Multiple-choice options are displayed as clickable buttons, styled according to the theme.
+        *   Initially, no option is selected.
+        *   The "Submit" button is visible and enabled (or becomes enabled once an option is selected).
+        *   "Next Question" / "Show Results" buttons are initially hidden.
+        *   No feedback `Alert` message is visible.
+        *   (If implemented) Quiz settings like "Auto-advance" toggle are present.
+
+2.  **Option Selection:**
+    *   **Action:** Click on one of the option buttons for the current question.
+    *   **Expected:**
+        *   The selected option button should visually change to indicate selection (e.g., themed border highlight).
+        *   If the "Submit" button was disabled, it should now be enabled.
+
+3.  **Answer Submission & Immediate Feedback:**
+    *   **Action:** With an option selected, click the "Submit" button.
+    *   **Expected:**
+        *   The "Submit" button becomes hidden or disabled.
+        *   All option buttons for the current question become disabled.
+        *   The correctly answered option button turns green (themed success color).
+        *   If an incorrect option was selected, their selected option turns red (themed error color).
+        *   An `Alert` message appears with correctness and explanation relevant to Past Perfect.
+        *   The appropriate control button ("Next Question" or "Show Results") appears.
+        *   (If implemented) The "live wrong answer log" updates if the answer was incorrect.
+        *   (If implemented) Auto-advance timer starts if enabled in settings.
+
+4.  **Navigating to Next Question (Manual or Auto):**
+    *   **Action:** Click the "Next Question" button, or allow auto-advance timer to elapse (if enabled and applicable).
+    *   **Expected:**
+        *   The next question and its options are displayed.
+        *   The question counter updates.
+        *   Option selection state is reset.
+        *   The immediate feedback `Alert` from the previous question is hidden.
+        *   The "Submit" button is visible.
+        *   "Next Question" / "Show Results" buttons are hidden until the new answer is submitted.
+
+5.  **Completing the Quiz & Showing Results:**
+    *   **Action:** Answer all questions. On the last question, after submitting, click "Show Results" or let auto-advance trigger it.
+    *   **Expected:**
+        *   The quiz interface is replaced by a "Quiz Results" view.
+        *   A summary of the final score is displayed.
+        *   A detailed "Answer Log" is displayed with all questions, user answers, correct answers, explanations for Past Perfect, and correctness indicators.
+        *   Buttons like "Back to Grammar Hub" and "View Overall Progress" are visible and functional.
+
+6.  **UI and Theme Consistency:**
+    *   **Action:** Throughout the "Past Perfect" quiz.
+    *   **Expected:**
+        *   All text and colors match the application theme.
+        *   Layout is clean and user-friendly.
+        *   Interactive elements behave as expected.
+        *   (If implemented) Quiz settings (e.g., auto-advance toggle) function correctly for this quiz.
+
+---
+
+**XIII. Interactive Quiz Functionality - Past Perfect Progressive (`/quiz/grammar/past-perfect-progressive`):**
+
+1.  **Initial Quiz Page Load:**
+    *   **Action:** Navigate to the "Past Perfect Progressive" quiz from the Grammar Hub, or directly access `/quiz/grammar/past-perfect-progressive`.
+    *   **Expected:**
+        *   The page title "Quiz for Past Perfect Progressive" is displayed.
+        *   The first question of the "Past Perfect Progressive" set is displayed clearly.
+        *   The question counter (e.g., "Question 1 of 30") is visible and accurate.
+        *   Multiple-choice options are displayed as clickable buttons, styled according to the theme.
+        *   Initially, no option is selected.
+        *   The "Submit" button is visible and enabled (or becomes enabled once an option is selected).
+        *   "Next Question" / "Show Results" buttons are initially hidden.
+        *   No feedback `Alert` message is visible.
+        *   (If implemented) Quiz settings like "Auto-advance" toggle are present.
+
+2.  **Option Selection:**
+    *   **Action:** Click on one of the option buttons for the current question.
+    *   **Expected:**
+        *   The selected option button should visually change to indicate selection (e.g., themed border highlight).
+        *   If the "Submit" button was disabled, it should now be enabled.
+
+3.  **Answer Submission & Immediate Feedback:**
+    *   **Action:** With an option selected, click the "Submit" button.
+    *   **Expected:**
+        *   The "Submit" button becomes hidden or disabled.
+        *   All option buttons for the current question become disabled.
+        *   The correctly answered option button turns green (themed success color).
+        *   If an incorrect option was selected, their selected option turns red (themed error color).
+        *   An `Alert` message appears with correctness and explanation relevant to Past Perfect Progressive.
+        *   The appropriate control button ("Next Question" or "Show Results") appears.
+        *   (If implemented) The "live wrong answer log" updates if the answer was incorrect.
+        *   (If implemented) Auto-advance timer starts if enabled in settings.
+
+4.  **Navigating to Next Question (Manual or Auto):**
+    *   **Action:** Click the "Next Question" button, or allow auto-advance timer to elapse (if enabled and applicable).
+    *   **Expected:**
+        *   The next question and its options are displayed.
+        *   The question counter updates.
+        *   Option selection state is reset.
+        *   The immediate feedback `Alert` from the previous question is hidden.
+        *   The "Submit" button is visible.
+        *   "Next Question" / "Show Results" buttons are hidden until the new answer is submitted.
+
+5.  **Completing the Quiz & Showing Results:**
+    *   **Action:** Answer all questions. On the last question, after submitting, click "Show Results" or let auto-advance trigger it.
+    *   **Expected:**
+        *   The quiz interface is replaced by a "Quiz Results" view.
+        *   A summary of the final score is displayed.
+        *   A detailed "Answer Log" is displayed with all questions, user answers, correct answers, explanations for Past Perfect Progressive, and correctness indicators.
+        *   Buttons like "Back to Grammar Hub" and "View Overall Progress" are visible and functional.
+
+6.  **UI and Theme Consistency:**
+    *   **Action:** Throughout the "Past Perfect Progressive" quiz.
+    *   **Expected:**
+        *   All text and colors match the application theme.
+        *   Layout is clean and user-friendly.
+        *   Interactive elements behave as expected.
+        *   (If implemented) Quiz settings (e.g., auto-advance toggle) function correctly for this quiz.
+
+[end of TESTING_PROCEDURES.md]

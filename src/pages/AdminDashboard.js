@@ -35,7 +35,14 @@ const AdminDashboard = () => {
         setUsers(usersList);
       } catch (err) {
         console.error("Error fetching users:", err);
-        setError("Failed to fetch users. Please try again.");
+        let displayError = "Failed to fetch users. Please try again.";
+        if (err.message) {
+          displayError += ` Message: ${err.message}`;
+        }
+        if (err.code) {
+          displayError += ` (Code: ${err.code})`;
+        }
+        setError(displayError);
       }
       setLoading(false);
     };

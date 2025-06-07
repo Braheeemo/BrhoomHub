@@ -16,6 +16,12 @@ const grammarSections = [
   { id: 'reported-speech', name: 'Reported Speech' },
   { id: 'prepositions', name: 'Prepositions' },
   { id: 'phrasal-verbs', name: 'Phrasal Verbs' },
+  {
+    id: 'emar-series',
+    name: 'EMAR Tailored Learning (EMAR Series Quiz)',
+    description: 'This is a quiz that tests your knowledge in the Emar English Book',
+    customPath: '/emar-series-hub'
+  }
 ];
 
 const GrammarHub = () => {
@@ -43,7 +49,7 @@ const GrammarHub = () => {
             <Paper
               elevation={3}
               component={RouterLink}
-              to={`/quiz/grammar/${section.id}`}
+              to={section.customPath || `/quiz/grammar/${section.id}`} // MODIFIED LINE
               sx={{
                 p: 3,
                 width: '100%',
@@ -57,6 +63,11 @@ const GrammarHub = () => {
               <Typography variant="h5" component="h2" sx={{ fontWeight: 'medium' }}>
                 {section.name}
               </Typography>
+              {section.description && ( // ADDED BLOCK for description
+                <Typography variant="body2" sx={{ mt: 1, color: 'text.secondary' }}>
+                  {section.description}
+                </Typography>
+              )}
             </Paper>
           </ListItem>
         ))}
