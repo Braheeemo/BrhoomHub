@@ -153,7 +153,6 @@ const presentPerfectQuestions = [
   { id: 29, level: "Advanced", questionText: "This is the best cake I ________.", options: ["ever eat", "ever ate", "have ever eaten", "am ever eating"], correctAnswerIndex: 2, explanation: "Present perfect ('have ever eaten') with 'ever' and superlatives ('the best') is used to talk about unique experiences up to the present." },
   { id: 30, level: "Advanced", questionText: "The patient ________ any improvement yet.", options: ["doesn't show", "didn't show", "hasn't shown", "isn't showing"], correctAnswerIndex: 2, explanation: "Present perfect negative ('hasn't shown') with 'yet' for something that hasn't happened up to the present time but might be expected." }
 ];
-];
 // --- END OF PRESENT PERFECT QUESTIONS DATA ---
 
 // --- START OF PAST PERFECT PROGRESSIVE QUESTIONS DATA --- // Corrected name based on current subtask
