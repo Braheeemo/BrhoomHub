@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import { login } from '../../services/auth'; // Assuming this path is correct
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { Container, Paper, Typography, TextField, Button, Box } from '@mui/material';
-// import { useTheme } from '@mui/material/styles'; // Needed if directly accessing theme.palette
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  // const theme = useTheme(); // Needed if directly accessing theme.palette
 
   const handleSubmit = async (event) => {
     event.preventDefault();
