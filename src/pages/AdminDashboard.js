@@ -20,6 +20,7 @@ const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [approvalError, setApprovalError] = useState('');
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -51,6 +52,7 @@ const AdminDashboard = () => {
   }, []);
 
   const handleApprove = async (userId) => {
+    setApprovalError('');
     try {
       const userDocRef = doc(db, 'users', userId);
       await updateDoc(userDocRef, {
@@ -63,7 +65,7 @@ const AdminDashboard = () => {
     } catch (err) {
       console.error("Error approving user:", err);
       // Potentially set an error message for this specific action
-      alert("Failed to approve user."); // Simple alert for now
+      setApprovalError("Failed to approve user. Please try again.");
     }
   };
 
@@ -79,6 +81,7 @@ const AdminDashboard = () => {
         </Box>
       )}
       {error && <Alert severity="error" sx={{ my: 2 }}>{error}</Alert>}
+      {approvalError && <Alert severity="error" sx={{ my: 2 }}>{approvalError}</Alert>}
 
       {!loading && !error && (
         <Paper elevation={3} sx={{ mt: 2, p: 2 }}>
