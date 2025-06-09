@@ -5,9 +5,6 @@ import Signup from './components/Auth/Signup';
 import WaitingApproval from './components/Auth/WaitingApproval';
 import AdminDashboard from './pages/AdminDashboard';
 import GrammarHub from './pages/GrammarHub';
-import EmarSeriesHub from './pages/EmarSeriesHub';
-import EmarGrammarQuizList from './pages/EmarGrammarQuizList';
-import EmarVocabularyQuizList from './pages/EmarVocabularyQuizList'; // Added EMAR Vocab List
 import CourseCatalog from './components/Course/CourseCatalog';
 // import QuizSection from './components/Quiz/QuizSection'; // REMOVED: Module not found
 import GrammarQuizPage from './components/Quiz/GrammarQuizPage'; // Import for the new grammar quiz page
@@ -123,24 +120,6 @@ const App = () => {
             ) : (
               <Navigate to="/login" />
             )
-          }
-        />
-        <Route
-          path="/emar-series-hub"
-          element={
-            isLoggedIn && isApproved ? <EmarSeriesHub /> : <Navigate to={isLoggedIn ? "/waiting-approval" : "/login"} />
-          }
-        />
-        <Route
-          path="/emar-grammar-quiz-list"
-          element={
-            isLoggedIn && isApproved ? <EmarGrammarQuizList /> : <Navigate to={isLoggedIn ? "/waiting-approval" : "/login"} />
-          }
-        />
-        <Route
-          path="/emar-vocabulary-quiz-list"
-          element={
-            isLoggedIn && isApproved ? <EmarVocabularyQuizList /> : <Navigate to={isLoggedIn ? "/waiting-approval" : "/login"} />
           }
         />
         <Route

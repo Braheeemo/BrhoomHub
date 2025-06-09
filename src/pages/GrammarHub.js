@@ -15,13 +15,7 @@ const grammarSections = [
   { id: 'passive-voice', name: 'Passive Voice' },
   { id: 'reported-speech', name: 'Reported Speech' },
   { id: 'prepositions', name: 'Prepositions' },
-  { id: 'phrasal-verbs', name: 'Phrasal Verbs' },
-  {
-    id: 'emar-series',
-    name: 'EMAR Tailored Learning (EMAR Series Quiz)',
-    description: 'This is a quiz that tests your knowledge in the Emar English Book',
-    customPath: '/emar-series-hub'
-  }
+  { id: 'phrasal-verbs', name: 'Phrasal Verbs' }
 ];
 
 const GrammarHub = () => {
