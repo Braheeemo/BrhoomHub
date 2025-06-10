@@ -232,8 +232,7 @@ const ifConditionalsQuestions = [
 // --- END OF IF CONDITIONALS QUESTIONS DATA ---
 
 // --- START OF EMAR VOCAB IDIOMS QUESTIONS DATA ---
-const emarVocabIdiomsQuestions = [
-  { id: 1, level: "Vocabulary", questionText: "What does "to break the ice" mean?", options: ["To shatter ice", "To start a conversation", "To freeze", "To swim in ice"], correctAnswerIndex: 1, explanation: ""To break the ice" means to initiate conversation in a social setting, especially to relieve tension." },
+const emarVocabIdiomsQuestions = [{ id: 1, level: "Vocabulary", questionText: "What does 'to break the ice' mean?", options: ["To shatter ice", "To start a conversation", "To freeze", "To swim in ice"], correctAnswerIndex: 1, explanation: "'To break the ice' means to initiate a conversation in a social setting, especially to relieve tension." }
   { id: 2, level: "Vocabulary", questionText: "Match the idiom: "To give someone pumpkins" means ______.", options: ["To reject someone", "To feed someone", "To give gifts", "To plant pumpkins"], correctAnswerIndex: 0, explanation: "This is a less common idiom, but in some contexts, "to give someone pumpkin" can mean to reject or jilt them, particularly in older American slang." },
   { id: 3, level: "Vocabulary", questionText: "What does "to lose face" mean?", options: ["To physically lose one’s face", "To be embarrassed", "To remove a mask", "To lose a game"], correctAnswerIndex: 1, explanation: ""To lose face" means to lose the respect of others or to be humiliated." },
   { id: 4, level: "Vocabulary", questionText: "Identify the idiom: "He has a wide face" means ______.", options: ["His face is broad", "He is well-liked", "He is stubborn", "He is dishonest"], correctAnswerIndex: 1, explanation: "In some cultures or contexts, "to have a wide face" (or similar expressions about face/connections) can imply being well-connected or influential, hence well-liked. This can be region-specific." },
